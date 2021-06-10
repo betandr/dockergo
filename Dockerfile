@@ -5,8 +5,7 @@ COPY . .
 COPY ./server .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app ./server
 
-FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
+FROM alpine:latest
 WORKDIR /root/
 COPY --from=builder /server/app .
 CMD ["./app"]  
